@@ -3,4 +3,6 @@
     <string name="symptom_checker">Symptom Checker</string>
     <string name="medi_searchTitle">Medi-Search</string>
     <string name="title_activity_patient_main">Main Activity</string>
+    <string name="medi_search_logo">Medi-Search Logo</string>
+    <string name="medi_search_brand_girl">Medi Search Brand Girl</string>
 </resources>
