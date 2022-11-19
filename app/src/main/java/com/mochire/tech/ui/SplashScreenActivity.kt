@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.mochire.tech.MainActivity
+import com.mochire.tech.ui.authentication.AuthActivity
 
 
 @Suppress("DEPRECATION")
@@ -27,7 +28,7 @@ class SplashScreenActivity: AppCompatActivity() {
         splashScreenImage.startAnimation(slideAnimation)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
             finish()
         }, splashTimeOut)

@@ -5,4 +5,13 @@
     <string name="title_activity_patient_main">Main Activity</string>
     <string name="medi_search_logo">Medi-Search Logo</string>
     <string name="medi_search_brand_girl">Medi Search Brand Girl</string>
+    <string name="create_account">Create Account</string>
+    <string name="userName">Name</string>
+    <string name="userEmail">Email</string>
+    <string name="userPassword">Password</string>
+    <string name="userConfirmPassword">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_instead">Sign-In Instead</string>
+    <string name="already_a_member">Already A Member?</string>
+    <string name="sign_in">Sign In</string>
 </resources>
