@@ -71,8 +71,6 @@ class SignInFragment: Fragment(R.layout.sign_in) {
                             startActivity(intent)
                         } else {
                             Log.w("SignInFragment", "signInWithEmail:failure", task.exception)
-                            Log.w("SignInFragment", email)
-                            Log.w("SignInFragment", password)
                             Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                         }
                     }
