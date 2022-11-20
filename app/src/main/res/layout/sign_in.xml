@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageLogo"
-        android:layout_width="94dp"
-        android:layout_height="111dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="144dp"
         android:contentDescription="@string/medi_search_logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,12 +44,14 @@
 
     <EditText
         android:id="@+id/userEmailSignIn"
-        android:layout_width="wrap_content"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:autofillHints="Email"
         android:ems="10"
         android:hint="@string/userEmail"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColorHint="#616161"
@@ -63,12 +65,14 @@
 
     <EditText
         android:id="@+id/userPasswordSignIn"
-        android:layout_width="wrap_content"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:autofillHints="Password"
         android:ems="10"
         android:hint="@string/userPassword"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="#616161"
@@ -80,10 +84,11 @@
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/sign_in"
+        android:backgroundTint="@color/buttonBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userPasswordSignIn"
