@@ -5,11 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.mochire.tech.R
+import kotlin.math.log
 
 class SignUpFragment: Fragment(R.layout.sign_up) {
+
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance(): SignUpFragment = SignUpFragment()
@@ -32,4 +39,44 @@ class SignUpFragment: Fragment(R.layout.sign_up) {
                 ?.commitNow()
         }
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val signUpButton: Button = view?.findViewById(R.id.signUpButton)!!
+        signUpButton.setOnClickListener{
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                Log.d("SignUpFragment", "User is already signed in")
+            } else {
+                Log.d("SignUpFragment", "User is not signed in")
+            }
+
+
+            val email = view?.findViewById<EditText>(R.id.userEmail)?.text.toString()
+            val password = view?.findViewById<EditText>(R.id.userPassword)?.text.toString()
+
+            auth.createUserWithEmailAndPassword(email, password).
+            addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("SignUpFragment", "User created successfully")
+                    Toast.makeText(context, "User created successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Log.w("SignUpFragment", "createUserWithEmail:failure", task.exception)
+                    Log.w("SignUpFragment", email)
+                    Log.w("SignUpFragment", password)
+                    Toast.makeText(context, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
+
+
 }
