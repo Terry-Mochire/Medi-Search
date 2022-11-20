@@ -61,7 +61,7 @@ class SignInFragment: Fragment(R.layout.sign_in) {
             val email = view?.findViewById<EditText>(R.id.userEmailSignIn)?.text.toString()
             val password = view?.findViewById<EditText>(R.id.userPasswordSignIn)?.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()) {
+            if (validateForm()) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -78,6 +78,23 @@ class SignInFragment: Fragment(R.layout.sign_in) {
                 Toast.makeText(activity, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+
+    private fun validateForm(): Boolean {
+        var valid = true
+        val email = view?.findViewById<EditText>(R.id.userEmailSignIn)?.text.toString()
+        val password = view?.findViewById<EditText>(R.id.userPasswordSignIn)?.text.toString()
+
+        if (email.isEmpty()) {
+            view?.findViewById<EditText>(R.id.userEmailSignIn)?.error = "Required"
+            valid = false
+        } else if (password.isEmpty()) {
+            view?.findViewById<EditText>(R.id.userPasswordSignIn)?.error = "Required."
+            valid = false
+        }
+
+        return valid
     }
 
 }
