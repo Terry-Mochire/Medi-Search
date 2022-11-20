@@ -2,17 +2,23 @@ package com.mochire.tech.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.auth.FirebaseAuth
 import com.mochire.tech.MainActivity
 import com.mochire.tech.R
 import com.mochire.tech.ui.authentication.SignInFragment.Companion.newInstance
 
 class SignInFragment: Fragment(R.layout.sign_in) {
+
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance(): SignInFragment = SignInFragment()
@@ -33,6 +39,46 @@ class SignInFragment: Fragment(R.layout.sign_in) {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.signInFragmentContainer, SignUpFragment.newInstance())
                 ?.commitNow()
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val signInButton: MaterialButton = view?.findViewById(R.id.signInButton)!!
+        signInButton.setOnClickListener{
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                Log.d("SignInFragment", "User is already signed in")
+            } else {
+                Log.d("SignInFragment", "User is not signed in")
+            }
+
+            val email = view?.findViewById<EditText>(R.id.userEmailSignIn)?.text.toString()
+            val password = view?.findViewById<EditText>(R.id.userPasswordSignIn)?.text.toString()
+
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("SignInFragment", "signInWithEmail:success")
+                            val user = auth.currentUser
+                            val intent = Intent(activity, MainActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Log.w("SignInFragment", "signInWithEmail:failure", task.exception)
+                            Log.w("SignInFragment", email)
+                            Log.w("SignInFragment", password)
+                            Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            } else {
+                Toast.makeText(activity, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
