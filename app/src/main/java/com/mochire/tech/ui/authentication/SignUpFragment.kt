@@ -1,5 +1,6 @@
 package com.mochire.tech.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.mochire.tech.MainActivity
 import com.mochire.tech.R
 import kotlin.math.log
 
@@ -65,6 +67,9 @@ class SignUpFragment: Fragment(R.layout.sign_up) {
                 if (task.isSuccessful) {
                     Log.d("SignUpFragment", "User created successfully")
                     Toast.makeText(context, "User created successfully", Toast.LENGTH_SHORT).show()
+                    val user = auth.currentUser
+                    val intent = Intent(activity, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Log.w("SignUpFragment", "createUserWithEmail:failure", task.exception)
                     Log.w("SignUpFragment", email)
