@@ -62,23 +62,52 @@ class SignUpFragment: Fragment(R.layout.sign_up) {
             val email = view?.findViewById<EditText>(R.id.userEmail)?.text.toString()
             val password = view?.findViewById<EditText>(R.id.userPassword)?.text.toString()
 
-            auth.createUserWithEmailAndPassword(email, password).
-            addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("SignUpFragment", "User created successfully")
-                    Toast.makeText(context, "User created successfully", Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
-                    val intent = Intent(activity, MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Log.w("SignUpFragment", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+            if (formValidation()){
+                auth.createUserWithEmailAndPassword(email, password).
+                addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("SignUpFragment", "User created successfully")
+                        Toast.makeText(context, "User created successfully", Toast.LENGTH_SHORT).show()
+                        val user = auth.currentUser
+                        val intent = Intent(activity, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Log.w("SignUpFragment", "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(context, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
     }
 
+
+    private fun formValidation(): Boolean {
+        val email = view?.findViewById<EditText>(R.id.userEmail)?.text.toString()
+        val password = view?.findViewById<EditText>(R.id.userPassword)?.text.toString()
+        val confirmPassword = view?.findViewById<EditText>(R.id.userConfirmPassword)?.text.toString()
+        if (email.isEmpty() || !isValidEmail(email)) {
+            view?.findViewById<EditText>(R.id.userEmail)?.error = "Valid email is required"
+            return false
+        }
+        if (password.isEmpty() || password.length < 6) {
+            view?.findViewById<EditText>(R.id.userPassword)?.error = "Create a password with at least 6 characters"
+            return false
+        }
+        if (confirmPassword.isEmpty()) {
+            view?.findViewById<EditText>(R.id.userConfirmPassword)?.error = "Confirm your password"
+            return false
+        }
+        if (password != confirmPassword) {
+            view?.findViewById<EditText>(R.id.userConfirmPassword)?.error = "Passwords do not match"
+            return false
+        }
+        return true
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
 
 
 
