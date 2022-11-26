@@ -12,9 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.mochire.tech.MainActivity
+import com.mochire.tech.ui.main.MainActivity
 import com.mochire.tech.R
-import kotlin.math.log
 
 class SignUpFragment: Fragment(R.layout.sign_up) {
 

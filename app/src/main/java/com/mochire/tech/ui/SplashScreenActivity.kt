@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mochire.tech.R
 import android.os.Handler
 import android.os.Looper
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import com.mochire.tech.MainActivity
 import com.mochire.tech.ui.authentication.AuthActivity
 
 
