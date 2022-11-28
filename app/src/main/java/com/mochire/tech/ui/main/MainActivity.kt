@@ -1,14 +1,18 @@
 package com.mochire.tech.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseUser
 import com.mochire.tech.R
 import com.mochire.tech.databinding.ActivityMainBinding
+import java.util.*
 
 
 @Suppress("DEPRECATION")
@@ -39,6 +43,11 @@ class MainActivity : AppCompatActivity() {
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
+        val account = intent.getStringExtra("account")
+        val user = intent.getStringExtra("user")
+        Log.d("account", account.toString())
+        Log.d("user", user.toString())
 
 
 //        GlobalScope.launch {
