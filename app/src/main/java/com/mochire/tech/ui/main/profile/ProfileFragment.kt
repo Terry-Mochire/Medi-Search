@@ -32,12 +32,12 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
 
-        val textView = binding.textProfile
-        textView.setOnClickListener(
-            View.OnClickListener {
-                auth.signOut()
-            }
-        )
+//        val textView = binding.textProfile
+//        textView.setOnClickListener(
+//            View.OnClickListener {
+//                auth.signOut()
+//            }
+//        )
         return root
     }
 
