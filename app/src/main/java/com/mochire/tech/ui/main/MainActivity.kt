@@ -2,17 +2,15 @@ package com.mochire.tech.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseUser
 import com.mochire.tech.R
 import com.mochire.tech.databinding.ActivityMainBinding
-import java.util.*
 
 
 @Suppress("DEPRECATION")
@@ -26,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar2)
+        binding.toolbar2.visibility = View.GONE
 
         val navView: BottomNavigationView = binding.navView
 
@@ -49,20 +48,5 @@ class MainActivity : AppCompatActivity() {
         Log.d("account", account.toString())
         Log.d("user", user.toString())
 
-
-//        GlobalScope.launch {
-//
-//
-//            val diagnosis = api.getDiagnosis(
-//                Patient(
-//                    Age(30),
-//                    listOf(Evidence("present", "s_299"), Evidence("present", "s_13")),
-//                    sex = "male"
-//
-//                )
-//            )
-//
-//            Log.d("TAG", "onCreate: $diagnosis")
-//        }
     }
 }
