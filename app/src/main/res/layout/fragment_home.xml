@@ -4,17 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightPurple"
     tools:context=".ui.main.home.HomeFragment">
 
+
+    <ImageView
+        android:id="@+id/home_icon"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/medi_searchstethoscopelogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/medi_search_logo" />
+
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/salutation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/salutation"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/cantarell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_icon" />
+
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="This is the HOME Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/welcome_message"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:fontFamily="@font/cantarell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/salutation" />
+
+    <Button
+        android:id="@+id/startSymptomAssessment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_symptom_assessment"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/buttonBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/featuredTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/featured_title"
+        android:textColor="@color/darkPurple"
+        android:textSize="24sp"
+        app:fontFamily="@font/cantarell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startSymptomAssessment" />
+
+    <ImageView
+        android:id="@+id/gif"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:src="@drawable/gif"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/featuredTitle" />
+
+    <TextView
+        android:id="@+id/readMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:fontFamily="@font/cantarell"
+        android:text="Read Our Featured Articles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gif" />
 </androidx.constraintlayout.widget.ConstraintLayout>
