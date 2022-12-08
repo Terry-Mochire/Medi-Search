@@ -1,4 +1,4 @@
-package com.mochire.tech.ui.main.home
+package com.mochire.tech.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.mochire.tech.api.ApiClient

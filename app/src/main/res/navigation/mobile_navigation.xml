@@ -7,24 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.mochire.tech.ui.main.profile.ProfileFragment"
+        android:name="com.mochire.tech.ui.main.fragments.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.mochire.tech.ui.main.home.HomeFragment"
+        android:name="com.mochire.tech.ui.main.fragments.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_conditions"
-        android:name="com.mochire.tech.ui.main.conditions.ConditionsFragment"
+        android:name="com.mochire.tech.ui.main.fragments.ConditionsFragment"
         android:label="@string/title_conditions"
         tools:layout="@layout/fragment_conditions" />
     <fragment
         android:id="@+id/navigation_assessment"
-        android:name="com.mochire.tech.ui.main.home.AssessmentFragment"
+        android:name="com.mochire.tech.ui.main.fragments.AssessmentFragment"
         android:label="@string/title_assessment"
         tools:layout="@layout/fragment_assessment"/>
 

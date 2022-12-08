@@ -1,4 +1,4 @@
-package com.mochire.tech.ui.main.profile
+package com.mochire.tech.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.mochire.tech.ui.main.home
+package com.mochire.tech.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.mochire.tech.R
 import com.mochire.tech.databinding.FragmentHomeBinding
+import com.mochire.tech.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
 

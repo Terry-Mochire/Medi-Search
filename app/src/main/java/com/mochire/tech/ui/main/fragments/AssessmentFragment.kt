@@ -1,4 +1,4 @@
-package com.mochire.tech.ui.main.home
+package com.mochire.tech.ui.main.fragments
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mochire.tech.databinding.FragmentAssessmentBinding
+import com.mochire.tech.viewmodels.HomeViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
