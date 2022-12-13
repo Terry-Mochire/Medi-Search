@@ -15,14 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mochire.tech.databinding.FragmentAssessmentBinding
 import com.mochire.tech.viewmodels.HomeViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class AssessmentFragment: Fragment() {
+class AssessmentFragment : Fragment() {
     private var _binding: FragmentAssessmentBinding? = null
     private val binding get() = _binding!!
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,31 +43,28 @@ class AssessmentFragment: Fragment() {
 
         val listView: ListView = binding.listView
 
-
-
         GlobalScope.launch {
-            val symptoms= homeViewModel.loadSymptoms()
+            val symptoms = homeViewModel.symptomNameWithId.await()
             val symptomNames = symptoms.keys.toList()
-            val symptomId = symptoms.values.toList()
-            Log.d("symptoms", symptomId[3])
-            Log.i("symptoms", symptomNames[3])
-
-//            listView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, symptomNames)
-
 
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    Log.d("query", query.toString())
-                    val submitSymptomId = symptoms[query]
-                    Log.d("submitSymptomId", submitSymptomId.toString())
+                    val submittedSymptomId = symptoms[query]
+                    Log.d("submitSymptomId", submittedSymptomId.toString())
+                    homeViewModel.getDiagnosis(submittedSymptomId.toString())
+                    listView.visibility = View.GONE
                     return false
                 }
 
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onQueryTextChange(newText: String?): Boolean {
                     val filteredList = symptomNames.filter { it.contains(newText.toString(), true) }
-                    listView.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, filteredList)
+                    listView.adapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_list_item_1,
+                        filteredList
+                    )
                     (listView.adapter as ArrayAdapter<*>).notifyDataSetChanged()
                     return false
                 }
@@ -76,11 +75,7 @@ class AssessmentFragment: Fragment() {
                 searchView.setQuery(item, false)
             }
 
-
-
         }
-
-
 
         return root
     }
