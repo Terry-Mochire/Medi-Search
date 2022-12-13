@@ -1,6 +1,5 @@
 package com.mochire.tech.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mochire.tech.models.Age
@@ -16,7 +15,10 @@ class HomeViewModel : ViewModel() {
 
     private val repository = ApiRepository()
 
-    val allSymptoms = viewModelScope.async {
+    var data = ArrayList<String>()
+    var question = ""
+
+    private val allSymptoms = viewModelScope.async {
         repository.getSymptoms(30)
         repository.allSymptoms
     }
@@ -31,12 +33,11 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getDiagnosis(symptomId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
             val patient = Patient(Age(30), listOf(Evidence("present", symptomId)), "male")
-            val response = repository.getDiagnosis(patient)
-            val diagnosis = repository.allDiagnosis.question.text
-
-            Log.d("diagnosis", diagnosis)
+            repository.getDiagnosis(patient)
+            question = repository.diagnosisQuestion
+            data = repository.options
         }
     }
 }

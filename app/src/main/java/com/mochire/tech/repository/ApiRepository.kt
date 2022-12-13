@@ -10,6 +10,8 @@ class ApiRepository {
     private val api = ApiClient().getApi()
     lateinit var allSymptoms: List <Symptoms>
     lateinit var allDiagnosis: Diagnosis
+    lateinit var diagnosisQuestion: String
+    lateinit var options: ArrayList <String>
 
     suspend fun getSymptoms(limit: Int) {
         try {
@@ -24,6 +26,12 @@ class ApiRepository {
         try {
             val response = api.getDiagnosis(patient)
             allDiagnosis = response
+            diagnosisQuestion = response.question.text
+            val choices = ArrayList <String>()
+            allDiagnosis.question.items.forEach() {
+                choices.add(it.name)
+            }
+            options = choices
         } catch (e: Exception) {
             e.printStackTrace()
         }
