@@ -15,7 +15,10 @@ class CustomAdapter( private val options: List<String>) : RecyclerView.Adapter<C
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(options[position])
+        holder.radioButton.text = options[position]
+        holder.radioButton.setOnClickListener {
+            holder.radioButton.isChecked = true
+        }
     }
 
     override fun getItemCount(): Int {
@@ -23,12 +26,8 @@ class CustomAdapter( private val options: List<String>) : RecyclerView.Adapter<C
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(option: String) {
-            itemView.apply {
-                val radioButton = findViewById<RadioButton>(R.id.radioButton)
-                radioButton.text = option
-            }
-        }
+        val radioButton: RadioButton = itemView.findViewById(R.id.radioButton)
+
     }
 
 }

@@ -8,16 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mochire.tech.R
 import com.mochire.tech.databinding.FragmentAssessmentBinding
-import com.mochire.tech.repository.ApiRepository
 import com.mochire.tech.ui.adapters.CustomAdapter
 import com.mochire.tech.viewmodels.HomeViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -28,7 +26,6 @@ import kotlinx.coroutines.launch
 class AssessmentFragment : Fragment() {
     private var _binding: FragmentAssessmentBinding? = null
     private val binding get() = _binding!!
-    private val repository = ApiRepository()
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
@@ -50,6 +47,8 @@ class AssessmentFragment : Fragment() {
         val listView: ListView = binding.listView
         val recyclerView: RecyclerView = binding.recyclerView
         val assessmentQuestion: TextView = binding.assessmentQuestion
+        val getDiagnosisButton: Button = binding.getDiagnosisButton
+        homeViewModel.submitSymptomId = ""
 
         GlobalScope.launch {
             val symptoms = homeViewModel.symptomNameWithId.await()
@@ -61,11 +60,13 @@ class AssessmentFragment : Fragment() {
                     val submittedSymptomId = symptoms[query]
                     Log.d("submitSymptomId", submittedSymptomId.toString())
                     homeViewModel.getDiagnosis(submittedSymptomId.toString())
+                    homeViewModel.submitSymptomId = submittedSymptomId.toString()
                     listView.visibility = View.GONE
                     assessmentQuestion.visibility = View.VISIBLE
                     assessmentQuestion.text = homeViewModel.question
                     recyclerView.layoutManager = LinearLayoutManager(context)
                     recyclerView.adapter = CustomAdapter(homeViewModel.data)
+                    getDiagnosisButton.visibility = View.VISIBLE
                     return false
                 }
 
@@ -85,6 +86,17 @@ class AssessmentFragment : Fragment() {
             listView.setOnItemClickListener { parent, _, position, _ ->
                 val item = parent.getItemAtPosition(position) as String
                 searchView.setQuery(item, false)
+            }
+
+            getDiagnosisButton.setOnClickListener {
+               val int = recyclerView.adapter?.itemCount
+                for (i in 0 until int!!) {
+                    val radioButton: RadioButton = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById(R.id.radioButton)!!
+                    if (radioButton.isChecked) {
+                        val selectedChoiceId = homeViewModel.getAssessmentQuestionId(radioButton.text.toString())
+                        homeViewModel.getDiagnosis(selectedChoiceId)
+                    }
+                }
             }
 
         }

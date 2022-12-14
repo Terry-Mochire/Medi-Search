@@ -1,5 +1,6 @@
 package com.mochire.tech.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mochire.tech.models.Age
@@ -17,6 +18,7 @@ class HomeViewModel : ViewModel() {
 
     var data = ArrayList<String>()
     var question = ""
+    var submitSymptomId = ""
 
     private val allSymptoms = viewModelScope.async {
         repository.getSymptoms(30)
@@ -34,10 +36,26 @@ class HomeViewModel : ViewModel() {
 
     fun getDiagnosis(symptomId: String) {
         CoroutineScope(Dispatchers.Main.immediate).launch {
-            val patient = Patient(Age(30), listOf(Evidence("present", symptomId)), "male")
+            val symptoms = ArrayList<Evidence>()
+            if (submitSymptomId != ""){
+                symptoms.add(Evidence("present", submitSymptomId))
+                symptoms.add(Evidence("present", symptomId))
+            } else {
+                symptoms.add(Evidence("present", symptomId))
+            }
+            val patient = Patient(Age(30), symptoms, "male")
+            Log.d("patient", patient.toString())
             repository.getDiagnosis(patient)
             question = repository.diagnosisQuestion
-            data = repository.options
+            data = repository.options.keys.toCollection(ArrayList())
+
+            val diagnosis = repository.allDiagnosis.conditions[0].common_name
+            Log.d("diagnosis", diagnosis)
         }
+    }
+
+    fun getAssessmentQuestionId(choiceName: String): String {
+        val choiceNameWithId = repository.options
+        return choiceNameWithId[choiceName]!!
     }
 }
