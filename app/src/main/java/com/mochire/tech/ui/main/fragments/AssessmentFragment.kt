@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mochire.tech.R
 import com.mochire.tech.databinding.FragmentAssessmentBinding
-import com.mochire.tech.ui.adapters.CustomAdapter
+import com.mochire.tech.ui.adapters.QuestionsAdapter
+import com.mochire.tech.ui.adapters.ResultsAdapter
 import com.mochire.tech.viewmodels.HomeViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -65,7 +66,7 @@ class AssessmentFragment : Fragment() {
                     assessmentQuestion.visibility = View.VISIBLE
                     assessmentQuestion.text = homeViewModel.question
                     recyclerView.layoutManager = LinearLayoutManager(context)
-                    recyclerView.adapter = CustomAdapter(homeViewModel.data)
+                    recyclerView.adapter = QuestionsAdapter(homeViewModel.data)
                     getDiagnosisButton.visibility = View.VISIBLE
                     return false
                 }
@@ -97,6 +98,11 @@ class AssessmentFragment : Fragment() {
                         homeViewModel.getDiagnosis(selectedChoiceId)
                     }
                 }
+                assessmentQuestion.text = "Diagnosis: "
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                recyclerView.adapter = ResultsAdapter(homeViewModel.returnedConditions)
+
+                getDiagnosisButton.visibility = View.GONE
             }
 
         }

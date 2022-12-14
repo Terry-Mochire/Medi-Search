@@ -7,7 +7,7 @@ import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.mochire.tech.R
 
-class CustomAdapter( private val options: List<String>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class QuestionsAdapter(private val options: List<String>) : RecyclerView.Adapter<QuestionsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.assessment_questions_design, parent, false)
