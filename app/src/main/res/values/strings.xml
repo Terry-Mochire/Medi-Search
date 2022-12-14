@@ -32,4 +32,7 @@
     <string name="back_icon">Back Icon</string>
     <string name="assessment_question">Assessment Question</string>
     <string name="get_diagnosis">Get Diagnosis</string>
+    <string name="condition_name">Condition Name</string>
+    <string name="condition_specialist">Condition Specialist</string>
+    <string name="condition_probability">Condition probability</string>
 </resources>
