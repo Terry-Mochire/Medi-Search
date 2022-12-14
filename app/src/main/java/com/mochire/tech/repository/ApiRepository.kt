@@ -12,6 +12,7 @@ class ApiRepository {
     lateinit var allDiagnosis: Diagnosis
     lateinit var diagnosisQuestion: String
     lateinit var options: HashMap <String, String>
+    lateinit var recommended_specialist: String
 
     suspend fun getSymptoms(limit: Int) {
         try {
@@ -32,6 +33,15 @@ class ApiRepository {
                 choices[it.name] = it.id
             }
             options = choices
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun getSpecialist(patient: Patient){
+        try {
+            val response = api.getSpecialist(patient)
+            recommended_specialist = response.recommended_specialist.name
         } catch (e: Exception) {
             e.printStackTrace()
         }

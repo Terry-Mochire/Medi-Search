@@ -20,6 +20,7 @@ class HomeViewModel : ViewModel() {
     var data = ArrayList<String>()
     var question = ""
     var submitSymptomId = ""
+    var recommendedSpecialist = "Test"
 
     private val allSymptoms = viewModelScope.async {
         repository.getSymptoms(30)
@@ -54,6 +55,8 @@ class HomeViewModel : ViewModel() {
             repository.allDiagnosis.conditions.forEach {
                 conditions.add(it)
             }
+            repository.getSpecialist(patient)
+            recommendedSpecialist = repository.recommended_specialist
 
             returnedConditions = conditions
         }
@@ -62,5 +65,13 @@ class HomeViewModel : ViewModel() {
     fun getAssessmentQuestionId(choiceName: String): String {
         val choiceNameWithId = repository.options
         return choiceNameWithId[choiceName]!!
+    }
+
+    fun getSpecialist(patient: Patient) {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
+            repository.getSpecialist(patient)
+            recommendedSpecialist = repository.recommended_specialist
+            Log.d("specialist", recommendedSpecialist)
+        }
     }
 }

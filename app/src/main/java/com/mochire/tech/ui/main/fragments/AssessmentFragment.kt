@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mochire.tech.R
 import com.mochire.tech.databinding.FragmentAssessmentBinding
+import com.mochire.tech.models.Age
+import com.mochire.tech.models.Evidence
+import com.mochire.tech.models.Patient
 import com.mochire.tech.ui.adapters.QuestionsAdapter
 import com.mochire.tech.ui.adapters.ResultsAdapter
 import com.mochire.tech.viewmodels.HomeViewModel
@@ -45,6 +48,9 @@ class AssessmentFragment : Fragment() {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
         searchView.setIconifiedByDefault(false)
 
+        val evidence = mutableListOf<Evidence>()
+        val patient = Patient(Age(30), evidence, "male")
+
         val listView: ListView = binding.listView
         val recyclerView: RecyclerView = binding.recyclerView
         val assessmentQuestion: TextView = binding.assessmentQuestion
@@ -60,6 +66,7 @@ class AssessmentFragment : Fragment() {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     val submittedSymptomId = symptoms[query]
                     Log.d("submitSymptomId", submittedSymptomId.toString())
+                    evidence.add(Evidence("present", submittedSymptomId.toString()))
                     homeViewModel.getDiagnosis(submittedSymptomId.toString())
                     homeViewModel.submitSymptomId = submittedSymptomId.toString()
                     listView.visibility = View.GONE
@@ -95,10 +102,12 @@ class AssessmentFragment : Fragment() {
                     val radioButton: RadioButton = recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById(R.id.radioButton)!!
                     if (radioButton.isChecked) {
                         val selectedChoiceId = homeViewModel.getAssessmentQuestionId(radioButton.text.toString())
+                        evidence.add(Evidence("present", selectedChoiceId))
                         homeViewModel.getDiagnosis(selectedChoiceId)
+                        homeViewModel.getSpecialist(patient)
                     }
                 }
-                assessmentQuestion.text = "Diagnosis: "
+                assessmentQuestion.text = "Specialist: " + homeViewModel.recommendedSpecialist
                 recyclerView.layoutManager = LinearLayoutManager(context)
                 recyclerView.adapter = ResultsAdapter(homeViewModel.returnedConditions)
 

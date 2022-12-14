@@ -16,7 +16,7 @@ class ResultsAdapter(private val conditions: List<Condition>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.conditionName.text = conditions[position].name
+        holder.conditionName.text = conditions[position].common_name
         holder.conditionProbability.text ="Probability: " + conditions[position].probability.toString()
     }
 
@@ -26,7 +26,6 @@ class ResultsAdapter(private val conditions: List<Condition>): RecyclerView.Adap
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val conditionName: TextView = itemView.findViewById(R.id.conditionName)
-        val conditionSpecialist: TextView = itemView.findViewById(R.id.conditionSpecialist)
         val conditionProbability: TextView = itemView.findViewById(R.id.conditionProbability)
 
     }
