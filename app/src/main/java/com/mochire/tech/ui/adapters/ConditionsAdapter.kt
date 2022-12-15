@@ -29,7 +29,7 @@ class ConditionsAdapter(private val conditions: List<Conditions>) : RecyclerView
         holder.itemView.setOnClickListener {
             val builder = AlertDialog.Builder(holder.itemView.context)
             builder.setTitle(conditions[position].common_name)
-            builder.setMessage(conditions[position].extras.hint)
+            builder.setMessage(conditions[position].extras.hint + "\n" + "Department: " +conditions[position].categories[0])
             builder.setCancelable(true)
             val alertDialog = builder.create()
             alertDialog.show()
