@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:hint="Name"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:minHeight="48dp"
             android:textColorHint="#757575"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@id/profile_form_userName" />
 
         <EditText
-            android:id="@+id/editTextPersonNumber"
+            android:id="@+id/profile_form_phoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -108,15 +108,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextPersonNumber" />
+            app:layout_constraintTop_toBottomOf="@id/profile_form_phoneNumber" />
 
         <EditText
-            android:id="@+id/editTextDateofBirth"
+            android:id="@+id/profile_form_age"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:hint="Date of Birth"
-            android:inputType="date"
+            android:hint="Age"
+            android:inputType="number"
             android:minHeight="48dp"
             android:textColorHint="#757575"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,10 +134,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextDateofBirth" />
+            app:layout_constraintTop_toBottomOf="@id/profile_form_age" />
 
         <EditText
-            android:id="@+id/editTextKnownConditions"
+            android:id="@+id/profile_form_known_conditions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -159,7 +159,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextKnownConditions" />
+            app:layout_constraintTop_toBottomOf="@id/profile_form_known_conditions" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchFemale"
@@ -169,7 +169,7 @@
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/switchMale"
-            app:layout_constraintTop_toBottomOf="@id/editTextKnownConditions" />
+            app:layout_constraintTop_toBottomOf="@id/profile_form_known_conditions" />
 
         <Button
             android:id="@+id/saveButton"

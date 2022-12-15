@@ -35,4 +35,5 @@
     <string name="condition_name">Condition Name</string>
     <string name="condition_specialist">Condition Specialist</string>
     <string name="condition_probability">Condition probability</string>
+    <string name="condition_common_name">Condition Common Name</string>
 </resources>
