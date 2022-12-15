@@ -1,6 +1,6 @@
 # Medi-Search
 
-<img src="Medi-Search/app/src/main/res/drawable/medi_searchlogo.png" width="200" height="200" title="Medi-Search Logo"/>
+<img src="./app/src/main/res/drawable/medi_searchlogo.png" width="400" height="300" title="Medi-Search Logo"/>
 
 ### Description
 The app allows a user to input their symptoms and get a possible diagnosis that would be causing the symptoms. Based on the probable diagnosis, it would then recommend to the user which specialist in health care they need to visit.
