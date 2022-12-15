@@ -14,9 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mochire.tech.database.UserApplication
 import com.mochire.tech.database.entity.User
 import com.mochire.tech.databinding.FragmentProfileBinding
+import com.mochire.tech.ui.main.MainActivity
 import com.mochire.tech.viewmodels.ProfileViewModel
 import com.mochire.tech.viewmodels.ProfileViewModelFactory
-import java.util.*
 
 
 class ProfileFragment : Fragment() {
@@ -72,8 +72,8 @@ class ProfileFragment : Fragment() {
             val user = profileViewModel.user
             binding.profileDisplayName.text = user.name
             binding.profileDisplayEmail.text = "0" + user.phoneNumber.toString()
-            binding.profileDisplayGender.text = user.gender.substring(0, 1).uppercase(Locale.ROOT) + user.gender.substring(1) + ", "// capitalize first letter
-            binding.profileDisplayAge.text = user.age.toString()
+            binding.profileDisplayGender.text = user.gender + ","// capitalize first letter
+            binding.profileDisplayAge.text = user.age.toString() + " "
 
             Log.d("ProfileFragment", "User already exists")
         } else {
@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
 
             val user = User(0, name = userName, gender = gender, age = age, phoneNumber = userPhoneNumber, conditions = userConditions)
             profileViewModel.createUser(user)
-            val intent = Intent(activity, HomeFragment::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             intent.putExtra("name", userName)
             startActivity(intent)
         }

@@ -34,6 +34,9 @@ class HomeFragment : Fragment() {
             .load(R.drawable.search)
             .into(binding.gif)
 
+        val userName = activity?.intent?.getStringExtra("name")
+        binding.salutation.text = "Hello, $userName"
+
 
         binding.startSymptomAssessment.setOnClickListener {
             val fragment = AssessmentFragment()
