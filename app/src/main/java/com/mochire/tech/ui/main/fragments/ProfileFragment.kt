@@ -1,6 +1,8 @@
 package com.mochire.tech.ui.main.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +16,7 @@ import com.mochire.tech.database.entity.User
 import com.mochire.tech.databinding.FragmentProfileBinding
 import com.mochire.tech.viewmodels.ProfileViewModel
 import com.mochire.tech.viewmodels.ProfileViewModelFactory
+import java.util.*
 
 
 class ProfileFragment : Fragment() {
@@ -44,12 +47,39 @@ class ProfileFragment : Fragment() {
         val age: EditText = binding.profileFormAge
         val knownConditions: EditText = binding.profileFormKnownConditions
         var gender: String = " "
-        if(binding.switchFemale.isChecked) {
-            binding.switchMale.isChecked = false
-            gender = "female"
-        } else{
-            binding.switchMale.isChecked = true
-            gender = "male"
+
+        binding.switchMale.setOnClickListener {
+            if (binding.switchMale.isChecked) {
+                gender = "male"
+                binding.switchFemale.isChecked = false
+            }
+        }
+        binding.switchFemale.setOnClickListener {
+            if (binding.switchFemale.isChecked) {
+                gender = "female"
+                binding.switchMale.isChecked = false
+            }
+        }
+
+        profileViewModel.getAllUsers()
+
+
+        if  (profileViewModel.allUsers.isNotEmpty()) {
+            binding.profileForm.visibility = View.GONE
+            binding.profileDisplay.visibility = View.VISIBLE
+
+            profileViewModel.getUser(profileViewModel.allUsers[0].id)
+            val user = profileViewModel.user
+            binding.profileDisplayName.text = user.name
+            binding.profileDisplayEmail.text = "0" + user.phoneNumber.toString()
+            binding.profileDisplayGender.text = user.gender.substring(0, 1).uppercase(Locale.ROOT) + user.gender.substring(1) + ", "// capitalize first letter
+            binding.profileDisplayAge.text = user.age.toString()
+
+            Log.d("ProfileFragment", "User already exists")
+        } else {
+            binding.profileForm.visibility = View.VISIBLE
+            binding.profileDisplay.visibility = View.GONE
+            Log.d("ProfileFragment", "User does not exist")
         }
 
 
@@ -62,6 +92,9 @@ class ProfileFragment : Fragment() {
 
             val user = User(0, name = userName, gender = gender, age = age, phoneNumber = userPhoneNumber, conditions = userConditions)
             profileViewModel.createUser(user)
+            val intent = Intent(activity, HomeFragment::class.java)
+            intent.putExtra("name", userName)
+            startActivity(intent)
         }
 
 

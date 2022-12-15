@@ -11,11 +11,24 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val userDao: UserDao) : ViewModel() {
 
-    fun getUser(name: String) = userDao.getUser(name)
+    var allUsers = listOf<User>()
+    var user = User(0, name = "", gender = "", age = 0, phoneNumber = 0, conditions = "")
+
+    fun getUser(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            user = userDao.getUser(id)
+        }
+    }
 
     fun createUser(user: User) {
         CoroutineScope(Dispatchers.IO).launch {
             userDao.createUser(user)
+        }
+    }
+
+    fun getAllUsers() {
+        CoroutineScope(Dispatchers.IO).launch {
+           allUsers = userDao.getAllUsers()
         }
     }
 

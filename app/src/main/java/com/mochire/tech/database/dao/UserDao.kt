@@ -11,6 +11,9 @@ interface UserDao {
     @Insert
     fun createUser(user: User)
 
-    @Query("SELECT * FROM user_table WHERE name = :name")
-    fun getUser(name: String): User
+    @Query("SELECT * FROM user_table WHERE id = :id")
+    fun getUser(id: Int): User
+
+    @Query("SELECT * FROM user_table")
+    fun getAllUsers(): List<User>
 }
