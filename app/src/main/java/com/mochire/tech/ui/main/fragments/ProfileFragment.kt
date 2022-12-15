@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.mochire.tech.database.UserApplication
 import com.mochire.tech.database.entity.User
 import com.mochire.tech.databinding.FragmentProfileBinding
+import com.mochire.tech.ui.authentication.AuthActivity
 import com.mochire.tech.ui.main.MainActivity
 import com.mochire.tech.viewmodels.ProfileViewModel
 import com.mochire.tech.viewmodels.ProfileViewModelFactory
@@ -97,6 +98,11 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.logoutButton.setOnClickListener() {
+            auth.signOut()
+            val intent = Intent(activity, AuthActivity::class.java)
+            startActivity(intent)
+        }
 
 
         return root

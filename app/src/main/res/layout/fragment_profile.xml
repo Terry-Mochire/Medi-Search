@@ -258,6 +258,19 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/profile_display_age"
             app:layout_constraintTop_toBottomOf="@+id/profile_display_email"  />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/profile_display_age"
+            android:text="Log Out"
+            app:backgroundTint="@color/buttonBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
