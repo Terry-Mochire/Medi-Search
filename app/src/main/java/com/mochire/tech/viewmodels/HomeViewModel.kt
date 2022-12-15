@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mochire.tech.models.Age
+import com.mochire.tech.models.Condition
 import com.mochire.tech.models.Evidence
 import com.mochire.tech.models.Patient
 import com.mochire.tech.repository.ApiRepository
@@ -15,8 +16,13 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
     private val repository = ApiRepository()
+    var returnedConditions = listOf<Condition>()
+    var data = ArrayList<String>()
+    var question = ""
+    var submitSymptomId = ""
+    var recommendedSpecialist = "Test"
 
-    val allSymptoms = viewModelScope.async {
+    private val allSymptoms = viewModelScope.async {
         repository.getSymptoms(30)
         repository.allSymptoms
     }
@@ -31,12 +37,41 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getDiagnosis(symptomId: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val patient = Patient(Age(30), listOf(Evidence("present", symptomId)), "male")
-            val response = repository.getDiagnosis(patient)
-            val diagnosis = repository.allDiagnosis.question.text
+        CoroutineScope(Dispatchers.Main.immediate).launch {
+            val symptoms = ArrayList<Evidence>()
+            if (submitSymptomId != ""){
+                symptoms.add(Evidence("present", submitSymptomId))
+                symptoms.add(Evidence("present", symptomId))
+            } else {
+                symptoms.add(Evidence("present", symptomId))
+            }
+            val patient = Patient(Age(30), symptoms, "male")
+            Log.d("patient", patient.toString())
+            repository.getDiagnosis(patient)
+            question = repository.diagnosisQuestion
+            data = repository.options.keys.toCollection(ArrayList())
 
-            Log.d("diagnosis", diagnosis)
+            val conditions = mutableListOf<Condition>()
+            repository.allDiagnosis.conditions.forEach {
+                conditions.add(it)
+            }
+            repository.getSpecialist(patient)
+            recommendedSpecialist = repository.recommended_specialist
+
+            returnedConditions = conditions
+        }
+    }
+
+    fun getAssessmentQuestionId(choiceName: String): String {
+        val choiceNameWithId = repository.options
+        return choiceNameWithId[choiceName]!!
+    }
+
+    fun getSpecialist(patient: Patient) {
+        CoroutineScope(Dispatchers.Main.immediate).launch {
+            repository.getSpecialist(patient)
+            recommendedSpecialist = repository.recommended_specialist
+            Log.d("specialist", recommendedSpecialist)
         }
     }
 }

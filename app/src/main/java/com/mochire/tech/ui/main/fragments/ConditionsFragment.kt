@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mochire.tech.databinding.FragmentConditionsBinding
+import com.mochire.tech.repository.ApiRepository
+import com.mochire.tech.ui.adapters.ConditionsAdapter
 import com.mochire.tech.viewmodels.ConditionsViewModel
 
 class ConditionsFragment : Fragment() {
@@ -17,16 +20,23 @@ class ConditionsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val repository = ApiRepository()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ConditionsViewModel::class.java)
+        val conditionsViewModel =
+            ViewModelProvider(this)[ConditionsViewModel::class.java]
 
         _binding = FragmentConditionsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        conditionsViewModel.getConditions()
+
+        val adapter = ConditionsAdapter(conditionsViewModel.returnedConditions)
+        binding.conditionsRecyclerView.adapter = adapter
+        binding.conditionsRecyclerView.layoutManager = LinearLayoutManager(context)
 
         return root
     }

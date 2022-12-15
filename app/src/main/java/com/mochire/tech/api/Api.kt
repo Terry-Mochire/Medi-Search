@@ -1,9 +1,6 @@
 package com.mochire.tech.api
 
-import com.mochire.tech.models.Conditions
-import com.mochire.tech.models.Diagnosis
-import com.mochire.tech.models.Patient
-import com.mochire.tech.models.Symptoms
+import com.mochire.tech.models.*
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -18,5 +15,8 @@ interface Api {
 
     @POST("diagnosis")
     suspend fun getDiagnosis(@Body patient: Patient): Diagnosis
+
+    @POST("recommend_specialist")
+    suspend fun getSpecialist(@Body patient: Patient): Specialist
 
 }

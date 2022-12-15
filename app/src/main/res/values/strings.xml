@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Medi-Search</string>
     <string name="symptom_checker">Symptom Checker</string>
     <string name="medi_searchTitle">Medi-Search</string>
@@ -14,7 +14,7 @@
     <string name="sign_in_instead">Sign-In Instead</string>
     <string name="already_a_member">Already A Member?</string>
     <string name="sign_in">Sign In</string>
-    <string name="client_id">95530679681-5e3tbabb5g1alf63smkvr92oh6roavq8.apps.googleusercontent.com</string>
+    <string name="client_id" tools:ignore="TypographyDashes">95530679681-5e3tbabb5g1alf63smkvr92oh6roavq8.apps.googleusercontent.com</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
@@ -28,4 +28,12 @@
     <string name="start_symptom_assessment">Start Symptom Assessment</string>
     <string name="featured_title">Featured</string>
     <string name="search">Search Your Symptoms</string>
+    <string name="radio_button_text">Radio Button</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="assessment_question">Assessment Question</string>
+    <string name="get_diagnosis">Get Diagnosis</string>
+    <string name="condition_name">Condition Name</string>
+    <string name="condition_specialist">Condition Specialist</string>
+    <string name="condition_probability">Condition probability</string>
+    <string name="condition_common_name">Condition Common Name</string>
 </resources>
