@@ -6,12 +6,16 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.mochire.tech.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.mochire.tech.ui.main.MainActivity
 import com.mochire.tech.R
 
 
 @Suppress("DEPRECATION")
 class AuthActivity: AppCompatActivity() {
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var authListener: FirebaseAuth.AuthStateListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -19,6 +23,8 @@ class AuthActivity: AppCompatActivity() {
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
+        authStateListener()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -34,6 +40,19 @@ class AuthActivity: AppCompatActivity() {
 
     }
 
+    private fun authStateListener() {
+        authListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            if (user != null) {
+
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user", user.displayName)
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -43,6 +62,7 @@ class AuthActivity: AppCompatActivity() {
             try {
                 val account = task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("account", account.displayName)
                 startActivity(intent)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -53,9 +73,7 @@ class AuthActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        authStateListener()
+        auth.addAuthStateListener(authListener)
     }
 }

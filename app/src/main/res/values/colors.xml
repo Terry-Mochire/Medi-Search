@@ -11,4 +11,5 @@
     <color name="lightPurple">#E8ECFE</color>
     <color name="darkPurple">#5650F6</color>
     <color name="buttonBlue">#265DD7</color>
+    <color name="grey">#BDBDBD</color>
 </resources>

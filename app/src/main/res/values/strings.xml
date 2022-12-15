@@ -15,4 +15,17 @@
     <string name="already_a_member">Already A Member?</string>
     <string name="sign_in">Sign In</string>
     <string name="client_id">95530679681-5e3tbabb5g1alf63smkvr92oh6roavq8.apps.googleusercontent.com</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_conditions">Conditions</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_assessment">Assessment</string>
+    <string name="profile_name">Terry Mochire</string>
+    <string name="salutation">Hello Terry, </string>
+    <string name="welcome_message">Welcome to Medi-Search. I can help you know more about your health.</string>
+    <string name="start_symptom_assessment">Start Symptom Assessment</string>
+    <string name="featured_title">Featured</string>
+    <string name="search">Search Your Symptoms</string>
 </resources>

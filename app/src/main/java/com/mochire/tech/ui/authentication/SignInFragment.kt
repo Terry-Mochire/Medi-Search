@@ -12,9 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
-import com.mochire.tech.MainActivity
 import com.mochire.tech.R
-import com.mochire.tech.ui.authentication.SignInFragment.Companion.newInstance
+import com.mochire.tech.ui.main.MainActivity
 
 class SignInFragment: Fragment(R.layout.sign_in) {
 
